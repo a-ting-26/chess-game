@@ -6,7 +6,7 @@ class Piece:
         self.color = color
         value_sign = 1 if color == 'white' else -1
         self.value = value * value_sign
-        self.valid_moves = []
+        self.moves = []
         self.moved = False
         self.texture = texture
         self.set_texture()
@@ -16,7 +16,10 @@ class Piece:
         self.texture = os.path.join(f'assets/images/imgs-{size}px/{self.color}_{self.name}.png')
     
     def add_move(self, move):
-        self.valid_moves.append(move)
+        self.moves.append(move)
+        
+    def clear_moves(self):
+        self.moves = []
     
 class Pawn(Piece):
     def __init__(self, color):
@@ -24,6 +27,7 @@ class Pawn(Piece):
             self.direction = -1
         else:
             self.direction = 1
+        self.en_passant = False
         super().__init__('pawn', color, 1.0)
         
 class Knight(Piece):
@@ -32,7 +36,7 @@ class Knight(Piece):
         
 class Bishop(Piece):
     def __init__(self, color):
-        super().__init__('knight', color, 3.0)
+        super().__init__('bishop', color, 3.0)
 
 class Rook(Piece):
     def __init__(self, color):
@@ -44,4 +48,6 @@ class Queen(Piece):
         
 class King(Piece):
     def __init__(self, color):
+        self.left_rook = None
+        self.right_rook = None
         super().__init__('king', color, 99999)
