@@ -63,8 +63,8 @@ class Main:
                         move = Move(initial, final)
                         if board.valid_move(dragger.piece, move):
                             captured = board.squares[released_row][released_col].has_piece()
-                            
                             board.move(dragger.piece, move)
+                            board.set_true_en_passant(dragger.piece)
                             game.sound_effect(captured)
                             game.show_bg(screen)
                             game.show_last_move(screen)
