@@ -72,7 +72,6 @@ class Board:
                         if isinstance(m.final.piece, King):
                             return True
         return False
-       
    
     def calc_moves(self, piece, row, col, bool=True):
         
